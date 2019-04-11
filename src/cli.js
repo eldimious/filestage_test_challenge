@@ -14,7 +14,7 @@ const {
 
 
 if (process.argv.length < 3) {
-  console.log('Need to add files paths as arguments');
+  throw new Error('Need to add files paths as arguments');
   process.exit(1);
 }
 
