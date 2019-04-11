@@ -8,11 +8,20 @@ In order to run the service, you have to run:
 node index.js src/data/file1.txt src/data/file2.txt
 ```
 
-where `src/data/file1.txt`, `src/data/file2.txt` are the paths to the files that you want to read. I am passing them as **nodeJS args**. 
+where:
+- `src/data/file1.txt`, 
+- `src/data/file2.txt` 
 
-Also, I wrote some tests too, and in order to be able to run them you need to: 
+are the **paths** for the files that you want to read. I am passing them to the service as **nodejs args** using `process.argv`.
+
+If we do not pass any file path, I return error: `Need to add files paths as arguments`.
+
+### Tests ###
+
+Also, I wrote some tests too. In order to be able to run them you need to: 
 
 ```shell
+npm install
 npm run test
 ```
 
