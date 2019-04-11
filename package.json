@@ -1,0 +1,19 @@
+{
+  "name": "filestage_test_challenge",
+  "version": "1.0.0",
+  "description": "Filestage test challenge",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eldimious/filestage_test_challenge.git"
+  },
+  "author": "Dimos Botsaris",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eldimious/filestage_test_challenge/issues"
+  },
+  "homepage": "https://github.com/eldimious/filestage_test_challenge#readme"
+}
