@@ -7,6 +7,10 @@ const teamA = 'Team A';
 
 const teamB = 'Team B';
 
+const BASKETBALL = 'basketball';
+
+const HANDBALL = 'handball';
+
 const sortArrayDescBy = prop => (a, b) => {
   if (a[prop] > b[prop]) return -1;
   if (a[prop] < b[prop]) return 1;
@@ -23,4 +27,6 @@ module.exports = {
   startsWithAny,
   teamA,
   teamB,
+  BASKETBALL,
+  HANDBALL,
 };

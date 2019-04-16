@@ -2,7 +2,8 @@ const {
   readFile,
 } = require('./services/fileService');
 const {
-  validateFile,
+  validateSportLineFormat,
+  validatePlayerLineFormat,
 } = require('./services/validationService');
 const {
   getNewPlayers,
@@ -20,17 +21,24 @@ if (process.argv.length < 3) {
 
 
 function getFileLines(data) {
-  const lines = data.split('\n');
-  const sport = lines.shift().toLowerCase();
-  return {
-    lines,
-    sport,
-  };
+  try {
+    const lines = data.split('\n');
+    const sport = lines.shift().toLowerCase();
+    lines.forEach((line) => {
+      validatePlayerLineFormat(sport, line);
+    });
+    return {
+      lines,
+      sport,
+    };
+  } catch (error) {
+    throw error;
+  }
 }
 
 async function getPlayersFromFile(file) {
   const data = await readFile(file, 'utf8');
-  validateFile(data);
+  validateSportLineFormat(data);
   const {
     lines,
     sport,
