@@ -2,9 +2,13 @@
   "name": "filestage_test_challenge",
   "version": "1.0.0",
   "description": "Filestage test challenge",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "test": "nyc mocha tests --recursive --timeout 15000"
+    "dev": "ts-node/register -r index.ts",
+    "build": "tsc",
+    "tsc": "tsc",
+    "prettier": "prettier --list-different './src/**/*.ts'",
+    "test": "nyc ts-mocha tests/**/*.test.ts --recursive --timeout 15000"
   },
   "repository": {
     "type": "git",
@@ -17,19 +21,27 @@
   },
   "homepage": "https://github.com/eldimious/filestage_test_challenge#readme",
   "devDependencies": {
-    "chai": "^4.2.0",
+    "@types/chai": "^4.3.0",
+    "@types/expect": "^24.3.0",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^17.0.8",
+    "@typescript-eslint/eslint-plugin": "^5.9.1",
+    "@typescript-eslint/parser": "^5.9.1",
+    "chai": "^4.3.4",
     "chai-as-promised": "^7.1.1",
-    "coveralls": "^2.13.3",
+    "coveralls": "^3.1.1",
     "dotenv": "^7.0.0",
-    "eslint": "^5.14.1",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.12.4",
+    "eslint": "^8.6.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^16.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "istanbul": "^0.4.5",
-    "mocha": "^6.0.1",
-    "nyc": "^13.3.0",
+    "nyc": "^15.1.0",
+    "prettier": "^2.5.1",
     "sinon": "^7.2.4",
-    "supertest": "^3.4.2"
+    "supertest": "^3.4.2",
+    "ts-mocha": "^8.0.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
   }
 }
