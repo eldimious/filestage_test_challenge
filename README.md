@@ -1,5 +1,7 @@
 # filestage_test_challenge
 
+For the old js version look at the branch [javascript](https://github.com/eldimious/filestage_test_challenge/tree/javascript)
+
 ### Quick Start ###
 
 In order to run the service, you have to run: 
