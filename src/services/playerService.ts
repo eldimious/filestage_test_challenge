@@ -1,11 +1,17 @@
-const Player = require('../domain/player');
-const calculatorService = require('./calculatorService')();
-const {
+import { Player } from '../domain/player';
+import { init as calculatorServiceFactory, ITeamsPoints } from './calculatorService';
+import {
   sortArrayDescBy,
-} = require('../common/utils');
+} from '../common/utils';
 
+const calculatorService = calculatorServiceFactory()
 
-function mapPlayerObj(lines, sport) {
+export interface PlayerTotalRating {
+  nickname: string;
+  ratingPoints: number;
+}
+
+function mapPlayerObj(lines: string[], sport: string): Player[] {
   return lines.map((line) => {
     const element = line.split(';');
     return new Player({
@@ -28,21 +34,21 @@ function mapPlayerObj(lines, sport) {
   });
 }
 
-function getNewPlayers(lines, sport) {
+export function getNewPlayers(lines: string[], sport: string): Player[] {
   const newPlayers = mapPlayerObj(lines, sport)
     .sort(sortArrayDescBy('ratingPoints'));
-  const pointsPerTeam = calculatorService.teamPointsCalculator(newPlayers);
+  const pointsPerTeam: ITeamsPoints = calculatorService.teamPointsCalculator(newPlayers);
   const winningTeam = Object.keys(pointsPerTeam)
-    .reduce((a, b) => pointsPerTeam[a] > pointsPerTeam[b] ? a : b);
+    .reduce((a, b) => pointsPerTeam[a as keyof ITeamsPoints] > pointsPerTeam[b as keyof ITeamsPoints] ? a : b);
   if (newPlayers[0].team === winningTeam) {
     newPlayers[0].ratingPoints += 10;
   }
   return newPlayers;
 }
 
-function getPlayerTotalRating(initialValues, newPlayersInfo) {
-  const updatedPlayersArray = initialValues.concat(newPlayersInfo);
-  let counts = updatedPlayersArray.reduce((prev, curr) => {
+export function getPlayerTotalRating(initialValues: Player[], newPlayersInfo: Player[]): PlayerTotalRating[] {
+  const updatedPlayersArray: Player[] = initialValues.concat(newPlayersInfo);
+  let counts = updatedPlayersArray.reduce((prev: Map<string, number>, curr: Player) => {
     let count = prev.get(curr.nickname) || 0;
     prev.set(curr.nickname, curr.ratingPoints + count);
     return prev;
@@ -52,9 +58,3 @@ function getPlayerTotalRating(initialValues, newPlayersInfo) {
     ratingPoints: value,
   }));
 }
-
-
-module.exports = {
-  getPlayerTotalRating,
-  getNewPlayers,
-};
